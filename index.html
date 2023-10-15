@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE-edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>UMRT Dashboard</title>
+    <link
+      href="https://fonts.googleapis.com/icon?family=Material+Symbols+Sharp"
+      rel="stylesheet"
+    />
+    <script src="https://cdn.plot.ly/plotly-2.16.1.min.js"></script>
+    <link rel="stylesheet" href="./style.css" />
+  </head>
+  <body>
+    <div class="container">
+      <aside>
+        <div class="top">
+          <div class="logo">
+            <img src="C:\Users\nowsh\OneDrive\Desktop\DashBoard\images\logo.png" alt="Profile Picture" class="profile-photo" />
+          </div>
+        </div>
+      </aside>
+      <main>
+        <h1>UMRT Dashboard</h1>
+        <div class="insights">
+          <div class="temperature">
+            <div class="middle">
+              <div class="left">
+                <h3>Temperature</h3>
+                <h1 id="temperature">0 C</h1>
+              </div>
+            </div>
+          </div>
+          <!-- End of temperature -->
+          <div class="humidity">
+            <div class "middle">
+              <div class="left">
+                <h3>Humidity</h3>
+                <h1 id="humidity">0 %</h1>
+              </div>
+            </div>
+          </div>
+          <!-- End of humidity -->
+        </div>
+        <!-- End of Insights -->
+        <div class="histories">
+          <h2>Charts</h2>
+          <div class="history-charts">
+            <div id="temperature-history" class="history-divs"></div>
+            <div id="humidity-history" class="history-divs"></div>
+          </div>
+        </div>
+        <div class="camera-feed">
+          <h2>Camera Feed</h2>
+          <video id="webcam-feed" autoplay></video>
+        </div>
+      </main>
+    </div>
+    <script>
+      // Sample data for temperature and humidity
+      const temperatureData = {
+        x: [/* Your time data points here */],
+        y: [/* Your temperature values here */],
+        type: 'line',
+        name: 'Temperature (C)',
+      };
+
+      const humidityData = {
+        x: [/* Your time data points here */],
+        y: [/* Your humidity values here */],
+        type: 'line',
+        name: 'Humidity (%)',
+      };
+
+      // Layout settings for the temperature and humidity graphs
+      const layout = {
+        xaxis: {
+          title: 'Time',
+        },
+        yaxis: {
+          title: 'Value',
+        },
+      };
+
+      // Create the temperature graph using Plotly
+      Plotly.newPlot('temperature-history', [temperatureData], { ...layout, title: 'Temperature Graph' });
+
+      // Create the humidity graph using Plotly
+      Plotly.newPlot('humidity-history', [humidityData], { ...layout, title: 'Humidity Graph' });
+
+      // Access the user's webcam and display the feed
+      const webcamElement = document.getElementById('webcam-feed');
+
+      // Check if the browser supports accessing the webcam
+      if (navigator.mediaDevices && navigator.mediaDevices.getUserMedia) {
+        navigator.mediaDevices
+          .getUserMedia({ video: true }) // Request video stream
+          .then(function (stream) {
+            // Assign the video stream to the video element
+            webcamElement.srcObject = stream;
+          })
+          .catch(function (error) {
+            console.error('Error accessing webcam:', error);
+          });
+      } else {
+        console.error('Webcam access not supported in this browser.');
+      }
+    </script>
+  </body>
+</html>
