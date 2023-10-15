@@ -10,7 +10,7 @@
   --color-light: rgba(132, 139, 200, 0.18);
   --color-primary-variant: #111e88;
   --color-dark-variant: #677483;
-  --color-background: #e4e3e3;
+  --color-background: #f9fafa;
 }
 
 body {
@@ -47,8 +47,8 @@ h1 {
 }
 
 .profile-photo {
-  width: 100px;
-  height: 100px;
+  width: 200px;
+  height: 200px;
   border-radius: 100%;
   overflow: hidden;
 }
